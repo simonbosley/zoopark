@@ -1,0 +1,5 @@
+# Files for the Git repository to ignore.
+
+# Directories for the Git repository to ignore (must end in /)
+DerivedData/
+build/
