@@ -15,15 +15,13 @@ int btree_unit_test()
     int test_ret_code = 0;
     
     // seed the random generator
-    srand((unsigned)time(0));
+    srand( (unsigned)time(0) );
     
     // Create some values to populate the tree with
     const int node_count = 10;
     
     // Create the root of the tree
     BTree<int>* root;
-    
-    
     
     // Create some nodes and add them to our tree
     for( int i = 0; i < node_count; ++i )

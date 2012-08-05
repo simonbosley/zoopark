@@ -20,6 +20,8 @@
 #include <sstream>
 #include "btree.h"
 
+int btree_unit_test();
+
 //
 // Create a BTree
 //
