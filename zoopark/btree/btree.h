@@ -3,19 +3,14 @@
 //  BTree
 //
 //  Created by Simon Bosley on 29/07/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Simon Bosley. All rights reserved.
 //
 
 #ifndef BTree_btree_h
 #define BTree_btree_h
 
-//
-//  btree.cpp
-//  BTree
-//
-//  Created by Simon Bosley on 29/07/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+// STL includes
+
 #include <string>
 #include <sstream>
 #include "btree.h"

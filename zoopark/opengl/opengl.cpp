@@ -6,18 +6,33 @@
 //  Copyright (c) 2012 Simon Bosley. All rights reserved.
 //
 
+// Project headers
 #include "opengl.h"
 
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/glu.h>
-#include <GLUT/GLUT.h>
+// STL headers
+#include <iostream>
+
+// Mac OS X headers
+#ifdef TARGET_MAC_OS
+    //#include <OpenGL/OpenGL.h>
+    //#include <OpenGL/glu.h>
+    #include <GLUT/GLUT.h>
+#endif
 
 void window( int argc, char* argv[] )
 {
-    glutInit( &argc, argv );                                         //initializes the GLUT framework
-  	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );   //sets up the display mode
+    // Initializes the GLUT framework
+    glutInit( &argc, argv );                                         
     
-    glutCreateWindow( "My first GLUT program" );                  //creates a window
+    // Sets up the display mode
+  	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
+    
+    // Set the initial window position and size
+    glutInitWindowPosition( 100, 100 );
+    glutInitWindowSize( 300, 300 );
+    
+    // Creates a window
+    glutCreateWindow( "My first GLUT program" );
     
     // Set the drawing function
   	glutDisplayFunc( redraw );
@@ -25,7 +40,8 @@ void window( int argc, char* argv[] )
     // Set the current matrix to projection type
 	glMatrixMode( GL_PROJECTION );
     
-	// Sets up the projection matrix for a perspective transform [view angle, aspect ratio, near clip, far clip]
+	// Sets up the projection matrix for a perspective transform
+    // [view angle, aspect ratio, near clip, far clip]
 	gluPerspective( 45, 1.0, 10.0, 200.0 );
 	
 	/*
@@ -41,31 +57,37 @@ void window( int argc, char* argv[] )
     
 	glMatrixMode( GL_MODELVIEW );
     
-    //the main loop of the GLUT framework
+    GLint viewport[4];
+    
+    glGetIntegerv( GL_VIEWPORT, viewport );
+    
+    std::cout << "GL_VIEWPORT x1: " << viewport[0] << ", y1: " << viewport[1] << ", x2: " << viewport[2] << ", y2 = " << viewport[3] << std::endl;
+    
+    // The main loop of the GLUT framework
 	glutMainLoop();
 }
 
 void redraw()
 {
     // Clears the colour and depth buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     // Push the current matrix on the top of the matrix stack at [x, y, z] : [0, 0, -100]
 	glPushMatrix();
-	glTranslatef( 0,0,-100 );
+	glTranslated( 0, 0, -100 );
 	
     // Drawing triangles, specify the first vertex color and position
 	glBegin( GL_TRIANGLES );
-	glColor3f( 1,0,0 );
-	glVertex3f( -30,-30,0 );
+	glColor3d( 1, 0, 0 );
+	glVertex3d( -30, -30, 0 );
     
     // Set the colour to green and set the second vertex
-	glColor3f( 0, 1, 0 );
-	glVertex3f( 30, -30, 0 );
+	glColor3d( 0, 1, 0 );
+	glVertex3d( 30, -30, 0 );
     
     // Second vertex in blue
-	glColor3f( 0, 0, 1 );
-	glVertex3f( -30, 30, 0 );
+	glColor3d( 0, 0, 1 );
+	glVertex3d( -30, 30, 0 );
     
     // Finish drawing, pop the matrix off the stack
 	glEnd();

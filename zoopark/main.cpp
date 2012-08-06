@@ -11,30 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// OpenGL Headers
-
-// Mac OS X headers
-#ifdef TARGET_OS_MAC
-//#include <OpenGL/OpenGL.h>
-//#include <OpenGL/glu.h>
-//#include <GLUT/GLUT.h>
-#endif
-
-// Linux
-#ifdef __linux__
-//#include <GL/gl.h>
-//#include <OpenGL/glut.h>
-#endif
-
-#ifdef _WIN32
-// Windows Includes Here
-#error Can't be compiled on Windows yet
-#endif
-
-#ifdef _WIN64
-#error Can't be compiled on Windows yet
-#endif
-
+// Project headers
 #include "opengl/opengl.h"
 #include "btree/btree.h"
 

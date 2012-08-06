@@ -3,7 +3,7 @@
 //  BTree
 //
 //  Created by Simon Bosley on 29/07/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Simon Bosley. All rights reserved.
 //
 
 #include <sstream>
