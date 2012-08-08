@@ -9,9 +9,7 @@
 #ifndef zoopark_opengl_h
 #define zoopark_opengl_h
 
-
 void redraw( void );
 void window( int argc, char* argv[] );
-
 
 #endif
