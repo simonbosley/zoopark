@@ -13,3 +13,4 @@ void redraw( void );
 void window( int argc, char* argv[] );
 
 #endif
+
