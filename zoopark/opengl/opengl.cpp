@@ -22,6 +22,46 @@
     #include <GL/freeglut_std.h>
 #endif
 
+// Window Settings
+class Viewport
+{
+public:
+    Viewport( GLdouble settings[6] )
+    {
+        left = settings[0];
+        right = settings[1];
+        bottom = settings[2];
+        top = settings[3];
+        zNear = settings[4];
+        zFar = settings[5];
+    }
+    
+    GLdouble left;
+    GLdouble right;
+    GLdouble bottom;
+    GLdouble top;
+    GLdouble zNear;
+    GLdouble zFar;
+};
+
+class Render
+{
+public:
+    static void redraw()
+    {
+        // Clears the colour
+        glClear( GL_COLOR_BUFFER_BIT );
+        
+        // Draws a single point
+        glBegin( GL_POINTS );
+        glVertex2f( 100 + 0.5, 200 + 0.5 );
+        glEnd();
+        
+        // Send the output to the screen
+        glutSwapBuffers();
+    }
+};
+
 void window( int argc, char* argv[] )
 {
     // Initializes the GLUT framework
@@ -32,39 +72,26 @@ void window( int argc, char* argv[] )
     
     // Set the initial window position and size
     glutInitWindowPosition( 100, 100 );
-    glutInitWindowSize( 300, 300 );
+    glutInitWindowSize( 640.0, 480.0 );
     
     // Creates a window
     glutCreateWindow( "My first GLUT program" );
     
     // Set the drawing function
-    glutDisplayFunc( redraw );
+    glutDisplayFunc( Render::redraw );
     
-    // Set the current matrix to projection type
+    // Disable depth as we're 2D
+    glDisable( GL_DEPTH_TEST );
+    
+    // Set-up a 2D view for drawing
     glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
     
-	// Sets up the projection matrix for a perspective transform
-    // [view angle, aspect ratio, near clip, far clip]
-	gluPerspective( 45, 1.0, 10.0, 200.0 );
-	
-	/*
-     
-        When we're done we switch the current matrix to the modelview matrix.
-        The modelview matrix is a 4x4 matrix used to transform points from their 
-        actual positions (in world space) into their positions relative to the camera. 
-        It's the matrix we use to specify our camera position and the position of 
-        anything we draw. The glutMainLoop() function is the main loop of the GLUT 
-        framework and we need to call it next.
-     
-     */
+    GLdouble settings[] = { 0.0, 640.0, 480.0, 0.0, 0.0, 1.0 };
+    Viewport vp( settings );
+    glOrtho( vp.left, vp.right, vp.bottom, vp.top, vp.zNear, vp.zFar );
     
-	glMatrixMode( GL_MODELVIEW );
-    
-    GLint viewport[4];
-    
-    glGetIntegerv( GL_VIEWPORT, viewport );
-    
-    std::cout << "GL_VIEWPORT x1: " << viewport[0] << ", y1: " << viewport[1] << ", x2: " << viewport[2] << ", y2 = " << viewport[3] << std::endl;
+    glMatrixMode( GL_MODELVIEW );
     
     // The main loop of the GLUT framework
 	glutMainLoop();
@@ -72,29 +99,13 @@ void window( int argc, char* argv[] )
 
 void redraw()
 {
-    // Clears the colour and depth buffers
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    // Clears the colour
+    glClear( GL_COLOR_BUFFER_BIT );
     
-    // Push the current matrix on the top of the matrix stack at [x, y, z] : [0, 0, -100]
-	glPushMatrix();
-	glTranslated( 0, 0, -100 );
-	
-    // Drawing triangles, specify the first vertex color and position
-	glBegin( GL_TRIANGLES );
-	glColor3d( 1, 0, 0 );
-	glVertex3d( -30, -30, 0 );
-    
-    // Set the colour to green and set the second vertex
-	glColor3d( 0, 1, 0 );
-	glVertex3d( 30, -30, 0 );
-    
-    // Second vertex in blue
-	glColor3d( 0, 0, 1 );
-	glVertex3d( -30, 30, 0 );
-    
-    // Finish drawing, pop the matrix off the stack
-	glEnd();
-	glPopMatrix();
+    // Draws a single point
+    glBegin( GL_POINTS );
+    glVertex2f( 100 + 0.5, 200 + 0.5 );
+    glEnd();
 	
     // Send the output to the screen
     glutSwapBuffers();
