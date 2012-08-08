@@ -10,6 +10,10 @@
 #include <iostream>
 #include "btree.h"
 
+#ifdef TARGET_LINUX_OS
+    #include <cstdlib>
+#endif
+
 int btree_unit_test()
 {
     int test_ret_code = 0;
