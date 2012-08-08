@@ -4,17 +4,17 @@ CFLAGS = -DTARGET_LINUX_OS
 LDLIBS = -lglut -lGL -lGLU
 
 main: main.o btree/btree_unit_test.o opengl/opengl.o
-\tg++ -o main main.o btree/btree_unit_test.o opengl/opengl.o ${LDLIBS}
+  g++ -o main main.o btree/btree_unit_test.o opengl/opengl.o ${LDLIBS}
 
 main.o: main.cpp
-\tg++ -c main.cpp ${CFLAGS}
+  g++ -c main.cpp ${CFLAGS}
 
 opengl/opengl.o: opengl/opengl.cpp
-\tg++ -c opengl/opengl.cpp -o opengl/opengl.o ${CFLAGS}
+  g++ -c opengl/opengl.cpp -o opengl/opengl.o ${CFLAGS}
 
 btree/btree_unit_test.o: btree/btree_unit_test.cpp
-\tg++ -c btree/btree_unit_test.cpp -o btree/btree_unit_test.o ${CFLAGS}
+  g++ -c btree/btree_unit_test.cpp -o btree/btree_unit_test.o ${CFLAGS}
 
 clean:
-\trm main main.o btree/btree_unit_test.o opengl/opengl.o
+  rm main main.o btree/btree_unit_test.o opengl/opengl.o
 
