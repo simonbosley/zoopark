@@ -14,9 +14,13 @@
 
 // Mac OS X headers
 #ifdef TARGET_MAC_OS
-    //#include <OpenGL/OpenGL.h>
-    //#include <OpenGL/glu.h>
     #include <GLUT/GLUT.h>
+#endif
+
+// Linux headers
+#ifdef TARGET_LINUX_OS
+   #include <GL/OpenGL.h>
+   #include <GL/glu.h>
 #endif
 
 void window( int argc, char* argv[] )
@@ -25,7 +29,7 @@ void window( int argc, char* argv[] )
     glutInit( &argc, argv );                                         
     
     // Sets up the display mode
-  	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
+    glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
     
     // Set the initial window position and size
     glutInitWindowPosition( 100, 100 );
@@ -35,10 +39,10 @@ void window( int argc, char* argv[] )
     glutCreateWindow( "My first GLUT program" );
     
     // Set the drawing function
-  	glutDisplayFunc( redraw );
+    glutDisplayFunc( redraw );
     
     // Set the current matrix to projection type
-	glMatrixMode( GL_PROJECTION );
+    glMatrixMode( GL_PROJECTION );
     
 	// Sets up the projection matrix for a perspective transform
     // [view angle, aspect ratio, near clip, far clip]
@@ -96,3 +100,4 @@ void redraw()
     // Send the output to the screen
     glutSwapBuffers();
 }
+
