@@ -99,3 +99,4 @@ void redraw()
     // Send the output to the screen
     glutSwapBuffers();
 }
+
