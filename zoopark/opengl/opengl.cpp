@@ -19,8 +19,7 @@
 
 // Linux headers
 #ifdef TARGET_LINUX_OS
-   #include <GL/OpenGL.h>
-   #include <GL/glu.h>
+    #include <GL/freeglut_std.h>
 #endif
 
 void window( int argc, char* argv[] )
@@ -100,4 +99,3 @@ void redraw()
     // Send the output to the screen
     glutSwapBuffers();
 }
-
