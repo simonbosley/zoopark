@@ -9,6 +9,7 @@
 // Project headers
 #include "opengl.h"
 #include "scene.h"
+#include "render2D.h"
 
 // STL headers
 #include <iostream>
@@ -46,42 +47,6 @@ class Viewport
         GLdouble zFar;
 };  
 
-class Render
-{
-public:
-    static Scene2D<GLdouble> scene;
-    
-    static void redraw()
-    {
-        // Clears the colour
-        glClear( GL_COLOR_BUFFER_BIT );
-        
-        // Loop through the scene onbjects
-        std::vector<SceneObject2D<GLdouble > >::iterator itO = scene.objects.begin();
-        std::vector<SceneObject2D<GLdouble > >::iterator itOEnd = scene.objects.end();
-        
-        for( ; itO != itOEnd; ++itO )
-        {
-            // Draw the points of our object
-            std::vector<Point2D<GLdouble > >::iterator itP = itO->points.begin();
-            std::vector<Point2D<GLdouble > >::iterator itPEnd = itO->points.end();
-            
-            // Draw the current point
-            glBegin( GL_POINTS );
-            
-            for( ; itP != itPEnd; ++itP )
-                glVertex2d( GLdouble( itP->x + 0.5 ), GLdouble( itP->y + 0.5 ) );
-            
-            glEnd();
-        }
-        
-        // Send the output to the screen
-        glutSwapBuffers();
-    }
-};
-
-Scene2D<GLdouble> Render::scene;
-
 void createScene( Scene2D<GLdouble>& s );
 
 void window( int argc, char* argv[] )
@@ -100,10 +65,10 @@ void window( int argc, char* argv[] )
     glutCreateWindow( "My first GLUT program" );
     
     // Create the scene
-    createScene( Render::scene );
+    createScene( Render2D::scene );
     
     // Set the drawing function
-    glutDisplayFunc( Render::redraw );
+    glutDisplayFunc( Render2D::redraw );
     
     // Disable depth as we're 2D
     glDisable( GL_DEPTH_TEST );

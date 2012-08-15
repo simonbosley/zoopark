@@ -24,6 +24,7 @@ class SceneObject2D
 {
 public:
     std::vector< Point2D<T> > points;
+    Point2D<T> origin;
 };
 
 template <class T>

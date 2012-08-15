@@ -39,6 +39,7 @@
 		0E4F230915CD3466007CFDB5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0E4F230B15CD35B5007CFDB5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		0E4F230D15CD35C5007CFDB5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		0EEEB40E15DC5C7100F4C253 /* render2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = render2D.h; path = opengl/render2D.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +68,7 @@
 			children = (
 				0E24C25515CF06F200241526 /* opengl.cpp */,
 				0E24C25415CF06E700241526 /* opengl.h */,
+				0EEEB40E15DC5C7100F4C253 /* render2D.h */,
 			);
 			name = opengl;
 			sourceTree = "<group>";
