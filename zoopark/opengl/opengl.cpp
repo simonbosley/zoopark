@@ -8,9 +8,11 @@
 
 // Project headers
 #include "opengl.h"
+#include "scene.h"
 
 // STL headers
 #include <iostream>
+#include <vector>
 
 // Mac OS X headers
 #ifdef TARGET_MAC_OS
@@ -25,42 +27,62 @@
 // Window Settings
 class Viewport
 {
-public:
-    Viewport( GLdouble settings[6] )
-    {
-        left = settings[0];
-        right = settings[1];
-        bottom = settings[2];
-        top = settings[3];
-        zNear = settings[4];
-        zFar = settings[5];
-    }
+    public:
+        Viewport( GLdouble settings[6] )
+        {
+            left = settings[0];
+            right = settings[1];
+            bottom = settings[2];
+            top = settings[3];
+            zNear = settings[4];
+            zFar = settings[5];
+        }
     
-    GLdouble left;
-    GLdouble right;
-    GLdouble bottom;
-    GLdouble top;
-    GLdouble zNear;
-    GLdouble zFar;
-};
+        GLdouble left;
+        GLdouble right;
+        GLdouble bottom;
+        GLdouble top;
+        GLdouble zNear;
+        GLdouble zFar;
+};  
 
 class Render
 {
 public:
+    static Scene2D<GLdouble> scene;
+    
     static void redraw()
     {
         // Clears the colour
         glClear( GL_COLOR_BUFFER_BIT );
         
-        // Draws a single point
-        glBegin( GL_POINTS );
-        glVertex2f( 100 + 0.5, 200 + 0.5 );
-        glEnd();
+        // Loop through the scene onbjects
+        std::vector<SceneObject2D<GLdouble > >::iterator itO = scene.objects.begin();
+        std::vector<SceneObject2D<GLdouble > >::iterator itOEnd = scene.objects.end();
+        
+        for( ; itO != itOEnd; ++itO )
+        {
+            // Draw the points of our object
+            std::vector<Point2D<GLdouble > >::iterator itP = itO->points.begin();
+            std::vector<Point2D<GLdouble > >::iterator itPEnd = itO->points.end();
+            
+            // Draw the current point
+            glBegin( GL_POINTS );
+            
+            for( ; itP != itPEnd; ++itP )
+                glVertex2d( GLdouble( itP->x + 0.5 ), GLdouble( itP->y + 0.5 ) );
+            
+            glEnd();
+        }
         
         // Send the output to the screen
         glutSwapBuffers();
     }
 };
+
+Scene2D<GLdouble> Render::scene;
+
+void createScene( Scene2D<GLdouble>& s );
 
 void window( int argc, char* argv[] )
 {
@@ -76,6 +98,9 @@ void window( int argc, char* argv[] )
     
     // Creates a window
     glutCreateWindow( "My first GLUT program" );
+    
+    // Create the scene
+    createScene( Render::scene );
     
     // Set the drawing function
     glutDisplayFunc( Render::redraw );
@@ -97,17 +122,32 @@ void window( int argc, char* argv[] )
 	glutMainLoop();
 }
 
-void redraw()
+void createScene( Scene2D<GLdouble>& s )
 {
-    // Clears the colour
-    glClear( GL_COLOR_BUFFER_BIT );
+    // let's create a square...
+    SceneObject2D<GLdouble> object;
+    Point2D<GLdouble> point;
     
-    // Draws a single point
-    glBegin( GL_POINTS );
-    glVertex2f( 100 + 0.5, 200 + 0.5 );
-    glEnd();
-	
-    // Send the output to the screen
-    glutSwapBuffers();
+    // top left
+    point.x = 50;
+    point.y = 50;
+    object.points.push_back( point );
+    
+    // top right
+    point.x = 250;
+    point.y = 50;
+    object.points.push_back( point );
+    
+    // bottom left
+    point.x = 50;
+    point.y = 250;
+    object.points.push_back( point );
+    
+    // bottom right
+    point.x = 250;
+    point.y = 250;
+    object.points.push_back( point );
+
+    s.objects.push_back( object );
 }
 

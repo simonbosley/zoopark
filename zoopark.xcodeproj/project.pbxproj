@@ -29,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E1F6BE715D7E7F6001E397B /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		0E24C25415CF06E700241526 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opengl.h; path = opengl/opengl.h; sourceTree = "<group>"; };
 		0E24C25515CF06F200241526 /* opengl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = opengl.cpp; path = opengl/opengl.cpp; sourceTree = "<group>"; };
 		0E24C25815CF075A00241526 /* btree_unit_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = btree_unit_test.cpp; path = btree/btree_unit_test.cpp; sourceTree = "<group>"; };
@@ -53,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E1F6BE515D7E7DF001E397B /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				0E1F6BE715D7E7F6001E397B /* scene.h */,
+			);
+			name = scene;
+			sourceTree = "<group>";
+		};
 		0E24C25315CF06D200241526 /* opengl */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +101,7 @@
 		0E4F22FA15CD31B7007CFDB5 /* zoopark */ = {
 			isa = PBXGroup;
 			children = (
+				0E1F6BE515D7E7DF001E397B /* scene */,
 				0E24C25715CF070200241526 /* btree */,
 				0E24C25315CF06D200241526 /* opengl */,
 				0E4F230915CD3466007CFDB5 /* main.cpp */,
